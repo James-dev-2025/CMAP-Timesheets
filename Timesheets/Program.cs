@@ -1,4 +1,6 @@
 
+using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Timesheets.Api.Services.CsvService;
 using Timesheets.Domain;
@@ -16,11 +18,19 @@ namespace Timesheets
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(config =>
+            {
+                config.CustomSchemaIds(x => x.FullName.Replace("+", "."));
+            });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(builder.Configuration.GetConnectionString("TimesheetDb")));
 
             builder.Services.AddScoped<ICsvService, CsvService>();
+
+            builder.Services.AddMediatR(x =>
+            {
+                x.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            });
 
             var app = builder.Build();
 
