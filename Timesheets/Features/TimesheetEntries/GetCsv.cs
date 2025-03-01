@@ -58,7 +58,7 @@ namespace Timesheets.Api.Features.TimesheetEntries
                     .ToListAsync(cancellationToken);
 
                 var entryDtos = entries
-                    .GroupBy(x => new { x.UserId, x.Date })
+                    .GroupBy(x => new { x.UserId, x.Date.Date })
                     .SelectMany(g => g.Select(x => new EntryDto
                     {
                         UserName = x.User.UserName,
