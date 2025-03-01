@@ -8,18 +8,18 @@ namespace Timesheets.Api.Features.Users
         public class Command : IRequest<Response>
         {
             public Guid Id { get; set; }
-            public string Name { get;  set; }
+            public string UserName { get;  set; }
         }
 
         public class Response
         {
-            public Guid Id { get; set; }
+            public bool Successful { get; set; }
         }
 
-        public class QueryHandler : IRequestHandler<Command, Response>
+        public class CommandHandler : IRequestHandler<Command, Response>
         {
             private readonly ApplicationDbContext _context;
-            public QueryHandler(ApplicationDbContext context)
+            public CommandHandler(ApplicationDbContext context)
             {
                 _context = context;   
             }

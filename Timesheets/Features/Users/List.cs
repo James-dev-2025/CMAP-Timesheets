@@ -13,7 +13,7 @@ namespace Timesheets.Api.Features.Users
 
         public class Response
         {
-            public List<User> Projects { get; set; }
+            public List<User> Users { get; set; }
         }
 
         public class QueryHandler : IRequestHandler<Query, Response>

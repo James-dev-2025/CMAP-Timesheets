@@ -12,12 +12,13 @@ namespace Timesheets.Api.Features.Projects
 
         public class Response
         {
+            public bool Successful { get; set; }
         }
 
-        public class QueryHandler : IRequestHandler<Command, Response>
+        public class CommandHandler : IRequestHandler<Command, Response>
         {
             private readonly ApplicationDbContext _context;
-            public QueryHandler(ApplicationDbContext context)
+            public CommandHandler(ApplicationDbContext context)
             {
                 _context = context;   
             }

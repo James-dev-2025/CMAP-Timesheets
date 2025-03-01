@@ -17,7 +17,7 @@ namespace Timesheets.Api.Features.TimesheetEntries
 
         public class Response
         {
-            public Guid Id { get; set; }
+            public bool Successful { get; set; }
         }
 
         public class QueryHandler : IRequestHandler<Command, Response>
