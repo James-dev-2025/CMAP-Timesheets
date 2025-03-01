@@ -46,7 +46,7 @@ namespace Timesheets.Test.Features.Projects
             var query = new List.Query { };
             var result = await handler.Handle(query, CancellationToken.None);
 
-            result.Projects.Count.ShouldBe(3);
+            result.Projects.Count.ShouldBe(2);
 
 
             result.Projects.SingleOrDefault(x => x.Id == existingProject1.Id).ShouldNotBeNull();

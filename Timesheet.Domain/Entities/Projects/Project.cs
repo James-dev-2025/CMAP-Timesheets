@@ -19,6 +19,12 @@ namespace Timesheets.Domain.Entities.Projects
             IsDeleted = false,
             Name = username,
         };
+
+        public void Update(string name)
+        {
+            Name = name;
+        }
+
         public void Delete()
         {
             IsDeleted = true;

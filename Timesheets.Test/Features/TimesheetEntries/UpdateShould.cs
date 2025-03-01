@@ -27,7 +27,7 @@ namespace Timesheets.Test.Features.TimesheetEntries
             {
                 Id = existingEntry.Id,
                 Date = DateTime.Now.AddDays(-1),
-                HoursWorked = TimeSpan.FromHours(6),
+                HoursWorked = 6.0m,
                 Description = "Developed new feature",
                 ProjectId = project.Id,
                 UserId = user.Id
@@ -63,7 +63,7 @@ namespace Timesheets.Test.Features.TimesheetEntries
             {
                 Id = existingEntry.Id,
                 Date = DateTime.Now.AddDays(-1),
-                HoursWorked = TimeSpan.FromHours(6),
+                HoursWorked = 6.0m,
                 Description = "Developed new feature",
                 ProjectId = Guid.Empty,
                 UserId = user.Id
@@ -99,7 +99,7 @@ namespace Timesheets.Test.Features.TimesheetEntries
             {
                 Id = existingEntry.Id,
                 Date = DateTime.Now.AddDays(-1),
-                HoursWorked = TimeSpan.FromHours(6),
+                HoursWorked = 6.0m,
                 Description = "Developed new feature",
                 ProjectId =project.Id,
                 UserId = Guid.Empty

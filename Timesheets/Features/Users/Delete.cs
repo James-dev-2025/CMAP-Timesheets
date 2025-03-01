@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Timesheets.Domain;
 
 namespace Timesheets.Api.Features.Users
@@ -25,8 +26,17 @@ namespace Timesheets.Api.Features.Users
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                
-                throw new NotImplementedException();
+                var user = await _context.Users.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+                if (user == null)
+                {
+                    return new Response { Successful = false };
+                }
+
+                user.Delete();
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                return new Response { Successful = true };
             }
         }
     }

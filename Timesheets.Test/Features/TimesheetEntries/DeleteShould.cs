@@ -28,7 +28,7 @@ namespace Timesheets.Test.Features.TimesheetEntries
 
             result.Successful.ShouldBeTrue();
 
-            var projectsInDb = await _context.Projects.ToListAsync();
+            var projectsInDb = await _context.TimesheetEntries.ToListAsync();
             projectsInDb.Count.ShouldBe(1);
             projectsInDb.First().IsDeleted.ShouldBeTrue();
         }
@@ -51,7 +51,7 @@ namespace Timesheets.Test.Features.TimesheetEntries
 
             result.Successful.ShouldBeFalse();
 
-            var projectsInDb = await _context.Projects.ToListAsync();
+            var projectsInDb = await _context.TimesheetEntries.ToListAsync();
             projectsInDb.Count.ShouldBe(1);
             projectsInDb.First().IsDeleted.ShouldBeFalse();
         }

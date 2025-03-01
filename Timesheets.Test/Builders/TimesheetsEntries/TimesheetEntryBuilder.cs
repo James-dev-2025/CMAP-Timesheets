@@ -8,7 +8,7 @@ namespace Timesheets.Test.Builders.Timesheets
     {
         private DateTime? _date;
         private string? _description;
-        private TimeSpan? _hoursWorked;
+        private decimal? _hoursWorked;
 
         private Guid _userId = Guid.NewGuid();
         private Guid _projectId = Guid.NewGuid();
@@ -27,7 +27,7 @@ namespace Timesheets.Test.Builders.Timesheets
             return this;
         }
 
-        public TimesheetEntryBuilder WithHoursWorked(TimeSpan hoursWorked)
+        public TimesheetEntryBuilder WithHoursWorked(decimal hoursWorked)
         {
             _hoursWorked = hoursWorked;
             return this;
@@ -60,7 +60,7 @@ namespace Timesheets.Test.Builders.Timesheets
                 .RuleFor(x => x.IsDeleted, x => _isDeleted)
                 .RuleFor(x => x.Date, x => _date ?? x.Date.Recent())
                 .RuleFor(x => x.Description, x => _description ?? x.Random.Words(20))
-                .RuleFor(x => x.HoursWorked, x => _hoursWorked ?? x.Date.Timespan(TimeSpan.FromHours(8)))
+                .RuleFor(x => x.HoursWorked, x => _hoursWorked ?? x.Random.Number(1, 6))
                 .RuleFor(x => x.UserId, x => _userId)
                 .RuleFor(x => x.ProjectId, x => _projectId);
 

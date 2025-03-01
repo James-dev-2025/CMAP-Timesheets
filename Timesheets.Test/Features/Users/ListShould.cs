@@ -40,7 +40,7 @@ namespace Timesheets.Test.Features.Users
             var query = new List.Query { };
             var result = await handler.Handle(query, CancellationToken.None);
 
-            result.Users.Count.ShouldBe(3);;
+            result.Users.Count.ShouldBe(2);;
 
             result.Users.SingleOrDefault(x => x.Id == existingUser1.Id).ShouldNotBeNull();
             result.Users.SingleOrDefault(x => x.Id == existingUser2.Id).ShouldNotBeNull();

@@ -15,9 +15,9 @@ namespace Timesheets.Test.Features.Users
 
             result.Successful.ShouldBeTrue();
 
-            var projectsInDb = await _context.Projects.ToListAsync();
-            projectsInDb.Count.ShouldBe(1);
-            projectsInDb.First().Name.ShouldBe(command.UserName);
+            var usersInDb = await _context.Users.ToListAsync();
+            usersInDb.Count.ShouldBe(1);
+            usersInDb.First().UserName.ShouldBe(command.UserName);
         }
 
         [Fact]
@@ -29,8 +29,8 @@ namespace Timesheets.Test.Features.Users
 
             result.Successful.ShouldBeFalse();
 
-            var projectsInDb = await _context.Projects.ToListAsync();
-            projectsInDb.Count.ShouldBe(0);
+            var usersInDb = await _context.Users.ToListAsync();
+            usersInDb.Count.ShouldBe(0);
         }
     }
 }

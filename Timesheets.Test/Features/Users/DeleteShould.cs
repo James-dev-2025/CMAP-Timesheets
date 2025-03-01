@@ -20,7 +20,7 @@ namespace Timesheets.Test.Features.Users
 
             result.Successful.ShouldBeTrue();
 
-            var usersInDb = await _context.Projects.ToListAsync();
+            var usersInDb = await _context.Users.ToListAsync();
             usersInDb.Count.ShouldBe(1);
             usersInDb.First().IsDeleted.ShouldBeTrue();
         }
@@ -37,7 +37,7 @@ namespace Timesheets.Test.Features.Users
 
             result.Successful.ShouldBeFalse();
 
-            var usersInDb = await _context.Projects.ToListAsync();
+            var usersInDb = await _context.Users.ToListAsync();
             usersInDb.Count.ShouldBe(1);
             usersInDb.First().IsDeleted.ShouldBeFalse();
         }

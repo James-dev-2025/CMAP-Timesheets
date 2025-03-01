@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Timesheets.Domain.Entities.Users
 {
@@ -18,6 +19,11 @@ namespace Timesheets.Domain.Entities.Users
             IsDeleted = false,
             UserName = username,
         };
+
+        public void Update(string userName)
+        {
+            UserName = userName;
+        }
         public void Delete()
         {
             IsDeleted = true;

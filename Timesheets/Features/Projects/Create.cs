@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Timesheets.Domain;
+using Timesheets.Domain.Entities.Projects;
 
 namespace Timesheets.Api.Features.Projects
 {
@@ -25,8 +26,17 @@ namespace Timesheets.Api.Features.Projects
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                
-                throw new NotImplementedException();
+
+                if (string.IsNullOrEmpty(request.Name)) 
+                {
+                    return new Response { Successful = false };
+                }
+
+                var project = Project.Create(request.Name);
+                _context.Projects.Add(project);
+                await _context.SaveChangesAsync(cancellationToken);
+
+                return new Response { Successful = true };
             }
         }
     }

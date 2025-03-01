@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Timesheets.Domain;
 
 namespace Timesheets.Api.Features.TimesheetEntries
@@ -10,7 +11,7 @@ namespace Timesheets.Api.Features.TimesheetEntries
             public Guid Id { get; set; }
             public DateTime Date { get; set; }
             public string Description { get; set; }
-            public TimeSpan HoursWorked { get; set; }
+            public decimal HoursWorked { get; set; }
             public Guid UserId { get; set; }
             public Guid ProjectId { get; set; }
         }
@@ -30,8 +31,23 @@ namespace Timesheets.Api.Features.TimesheetEntries
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                
-                throw new NotImplementedException();
+                if (request.UserId == Guid.Empty || request.ProjectId == Guid.Empty)
+                {
+                    return new Response { Successful = false };
+                }
+
+
+                var entry = await _context.TimesheetEntries.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+                if (entry == null)
+                {
+                    return new Response { Successful = false };
+                }
+
+                entry.Update(request.Date,request.Description,request.HoursWorked,request.UserId,request.ProjectId);
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                return new Response { Successful = true };
             }
         }
     }

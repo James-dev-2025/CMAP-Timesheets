@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Timesheets.Domain;
 
 namespace Timesheets.Api.Features.Projects
@@ -26,8 +27,22 @@ namespace Timesheets.Api.Features.Projects
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                
-                throw new NotImplementedException();
+                if (string.IsNullOrEmpty(request.Name))
+                {
+                    return new Response { Successful = false };
+                }
+
+                var project = await _context.Projects.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+                if (project == null)
+                {
+                    return new Response { Successful = false };
+                }
+
+                project.Update(request.Name);
+
+                await _context.SaveChangesAsync(cancellationToken);
+
+                return new Response { Successful = true };
             }
         }
     }

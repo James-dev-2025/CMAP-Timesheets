@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Timesheets.Domain;
+using Timesheets.Domain.Entities.Projects;
+using Timesheets.Domain.Entities.Users;
 
 namespace Timesheets.Api.Features.Users
 {
@@ -25,8 +27,16 @@ namespace Timesheets.Api.Features.Users
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                
-                throw new NotImplementedException();
+                if (string.IsNullOrEmpty(request.UserName))
+                {
+                    return new Response { Successful = false };
+                }
+
+                var user = User.Create(request.UserName);
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync(cancellationToken);
+
+                return new Response { Successful = true };
             }
         }
     }
