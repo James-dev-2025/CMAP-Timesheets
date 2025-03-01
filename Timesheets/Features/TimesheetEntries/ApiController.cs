@@ -24,5 +24,10 @@ public class ApiController : ControllerBase
     public async Task<Delete.Response> Delete([FromBody] Delete.Command request) => await _mediator.Send(request);
 
     [HttpGet("getCsv")]
-    public async Task<GetCsv.Response> GetCsv([FromQuery] GetCsv.Query request) => await _mediator.Send(request);
+    public async Task<IActionResult> GetCsv([FromQuery] GetCsv.Query request)
+    {
+        var response = await _mediator.Send(request);
+        return File(response.Csv, "text/csv", response.FileName);
+    }
+
 }
