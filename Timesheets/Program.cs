@@ -32,7 +32,7 @@ namespace Timesheets
 
             app.UseAuthorization();
 
-
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

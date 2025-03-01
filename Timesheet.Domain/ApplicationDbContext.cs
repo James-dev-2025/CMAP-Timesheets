@@ -13,7 +13,7 @@ using Timesheets.Domain.EntityConfiguration.Users;
 
 namespace Timesheets.Domain
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
 
         #region Db Sets
