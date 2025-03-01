@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using Timesheets.Domain;
+
 namespace Timesheets
 {
     public class Program
@@ -13,6 +16,8 @@ namespace Timesheets
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(builder.Configuration.GetConnectionString("TimesheetDb")));
 
             var app = builder.Build();
 
