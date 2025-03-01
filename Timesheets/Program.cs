@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Timesheets.Api.Services.CsvService;
 using Timesheets.Domain;
 
 namespace Timesheets
@@ -18,6 +19,8 @@ namespace Timesheets
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(builder.Configuration.GetConnectionString("TimesheetDb")));
+
+            builder.Services.AddScoped<ICsvService, CsvService>();
 
             var app = builder.Build();
 
