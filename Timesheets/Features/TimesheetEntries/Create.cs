@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Timesheets.Domain;
 using Timesheets.Domain.Entities.Projects;
 using Timesheets.Domain.Entities.TimesheetEntries;
@@ -32,6 +33,18 @@ namespace Timesheets.Api.Features.TimesheetEntries
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
                 if (request.UserId == Guid.Empty || request.ProjectId == Guid.Empty)
+                {
+                    return new Response { Successful = false };
+                }
+
+                var userExists = await _context.Users.AnyAsync(x => x.Id == request.UserId);
+                if (!userExists)
+                {
+                    return new Response { Successful = false };
+                }
+
+                var projectExists = await _context.Projects.AnyAsync(x => x.Id == request.ProjectId);
+                if (!projectExists)
                 {
                     return new Response { Successful = false };
                 }

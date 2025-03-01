@@ -55,6 +55,8 @@ namespace Timesheets.Api.Features.TimesheetEntries
                     .TimesheetEntries
                     .Where(x => request.UserId == null || x.UserId == request.UserId)
                     .Where(x => request.ProjectId == null || x.ProjectId == request.ProjectId)
+                    .Include(x => x.User)
+                    .Include(x => x.Project)
                     .ToListAsync(cancellationToken);
 
                 var entryDtos = entries
