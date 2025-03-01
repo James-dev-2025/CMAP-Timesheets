@@ -10,8 +10,8 @@ namespace Timesheets.Api.Features.TimesheetEntries
     {
         public class Query : IRequest<Response>
         {
-            public Guid UserId { get; set; }
-            public Guid ProjectId { get; set; }
+            public Guid? UserId { get; set; }
+            public Guid? ProjectId { get; set; }
         }
 
         public class Response
@@ -20,7 +20,7 @@ namespace Timesheets.Api.Features.TimesheetEntries
             public string FileName { get; set; }
         }
 
-        private class EntryDto
+        public class EntryDto
         {
             [Name("User Name")]
             public string UserName { get; set; }
@@ -41,8 +41,8 @@ namespace Timesheets.Api.Features.TimesheetEntries
         public class QueryHandler : IRequestHandler<Query, Response>
         {
             private readonly ApplicationDbContext _context;
-            private readonly CsvService _csvService;
-            public QueryHandler(ApplicationDbContext context, CsvService csvService)
+            private readonly ICsvService _csvService;
+            public QueryHandler(ApplicationDbContext context, ICsvService csvService)
             {
                 _context = context;
                 _csvService = csvService;
@@ -55,6 +55,9 @@ namespace Timesheets.Api.Features.TimesheetEntries
                     .TimesheetEntries
                     .Where(x => request.UserId == null || x.UserId == request.UserId)
                     .Where(x => request.ProjectId == null || x.ProjectId == request.ProjectId)
+                    .ToListAsync(cancellationToken);
+
+                var entryDtos = entries
                     .GroupBy(x => new { x.UserId, x.Date })
                     .SelectMany(g => g.Select(x => new EntryDto
                     {
@@ -63,14 +66,13 @@ namespace Timesheets.Api.Features.TimesheetEntries
                         Project = x.Project.Name,
                         Description = x.Description,
                         HoursWorked = x.HoursWorked,
-                        HoursWorkedForTheDay = g.Sum(e => e.HoursWorked) // Sum of hours for the user on that date
+                        HoursWorkedForTheDay = g.Sum(e => e.HoursWorked)
                     }))
                     .OrderBy(x => x.UserName)
                     .ThenBy(x => x.Project)
-                    .ToListAsync(cancellationToken);
+                    .ToList();
 
-
-                var csv =  _csvService.GenerateCsv(entries);
+                var csv =  _csvService.GenerateCsv(entryDtos);
 
                 return new Response { Csv = csv, FileName = $"Timesheet_{DateTime.Now}" };
             }
