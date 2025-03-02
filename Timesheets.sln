@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Api", "Timesheets.Api.csproj", "{DA8C3DE4-6FAF-4806-9613-576E84EFDB26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Api", "Timesheets.Api\Timesheets.Api.csproj", "{DA8C3DE4-6FAF-4806-9613-576E84EFDB26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Domain", "..\Timesheet.Domain\Timesheets.Domain.csproj", "{405CE65A-F5EE-4B26-9254-E340945044DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Domain", "Timesheet.Domain\Timesheets.Domain.csproj", "{405CE65A-F5EE-4B26-9254-E340945044DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Test", "..\Timesheets.Test\Timesheets.Test.csproj", "{7A944658-2178-43B4-9A15-B58443B3AD8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets.Test", "Timesheets.Test\Timesheets.Test.csproj", "{7A944658-2178-43B4-9A15-B58443B3AD8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
