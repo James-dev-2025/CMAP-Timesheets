@@ -16,13 +16,13 @@ This project houses all the tests for the features in the Timesheets.api project
 ## How to use
 Run the Timesheets.Api Project with the https launch profile. You should see a swagger UI open in your browser (If it does not open go to this Url while running the project: https://localhost:7286/swagger/index.html).
 
-The First thing to do is to add a User and A Project To the Database. You can do this with the "/api/user/create" and the "/api/project/create" endpoints. Feel free to create as many any as you want.
+The First thing to do is to add a User and A Project To the Database. You can do this with the **"/api/user/create"** and the **"/api/project/create"** endpoints. Feel free to create as many any as you want.
 
-Once all Projects and Users have been created. Call "api/users/list" and note down the data you get back. Do the same for Projects on the "api/projects/list" endpoint.
+Once all Projects and Users have been created. Call **"api/users/list"** and note down the data you get back. Do the same for Projects on the **"api/projects/list"** endpoint.
 
-With a projects and users in the database you can now record Timesheet entries. Use the "api/timesheetEntries/create" endpoint to try this out. For the "userId" field use the Id from a previously created User. Do the same for the ProjectId field.
+With a projects and users in the database you can now record Timesheet entries. Use the **"api/timesheetEntries/create"** endpoint to try this out. For the "userId" field use the Id from a previously created User. Do the same for the ProjectId field.
 
-Next, try the "/api/timesheetEntries/getCsv" endpoint. You will notice that there are two extra fields. One allows you to specify getting all timesheet entries of a single user and one allows you to get all timesheet entries for a project. To get all entries regardless of user or project just leave them as null.
+Next, try the **"/api/timesheetEntries/getCsv"** endpoint. You will notice that there are two extra fields. One allows you to specify getting all timesheet entries of a single user and one allows you to get all timesheet entries for a project. To get all entries regardless of user or project just leave them as null.
 
 After making the request you will see a Download file button in the Response body.
 
